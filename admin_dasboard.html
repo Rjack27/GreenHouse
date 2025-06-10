@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greenhouse Dashboard</title>
+  <link rel="stylesheet" href="admin_dasboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2 class="logo">🌱 GreenHouse</h2>
+      <nav>
+        <ul>
+          <li onclick="showSection('home')"><i class="fas fa-home"></i> Home</li>
+          <li onclick="showSection('monitoring')"><i class="fas fa-chart-line"></i> Monitoring</li>
+          <li onclick="showSection('control')"><i class="fas fa-sliders-h"></i> Kontrol</li>
+          <li onclick="showSection('setting')"><i class="fas fa-cog"></i> Setting</li>
+          <li><i class="fas fa-sign-out-alt"></i> Logout</li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <section id="home">
+        <h2>📘 Studi Literatur Greenhouse</h2>
+        <p>Sistem greenhouse memanfaatkan teknologi untuk mengatur suhu, kelembaban, dan cahaya agar tanaman tumbuh optimal. Sensor umum yang digunakan termasuk TDS, suhu, kelembaban, dan cahaya.</p>
+        <p>Sensor TDS (Total Dissolved Solids) digunakan untuk mengukur konsentrasi zat terlarut dalam air. Motor digunakan untuk mengatur sirkulasi air atau pupuk.</p>
+        <p>Tanaman yang cocok dalam greenhouse termasuk tomat, paprika, selada, stroberi, dan berbagai tanaman herbal seperti basil dan mint.</p>
+      </section>
+
+      <section id="monitoring" class="hidden">
+        <h2>📊 Grafik Data Sensor</h2>
+        <p>Nilai TDS: <span id="tdsValue">Loading...</span></p>
+        <p>Kecepatan Motor: <span id="motorSpeed">Loading...</span></p>
+      </section>
+
+      <section id="control" class="hidden">
+        <h2>🎛️ Kontrol</h2>
+        <label>Min TDS: <input type="number" id="minTds"></label><br>
+        <label>Max TDS: <input type="number" id="maxTds"></label><br>
+        <label>Kecepatan Motor: <input type="number" id="motorControl"></label><br>
+        <button onclick="updateControl()">Simpan</button>
+      </section>
+
+      <section id="setting" class="hidden">
+        <h2>🔒 Ganti Password</h2>
+        <label>Password Baru: <input type="password" id="newPassword"></label><br>
+        <button onclick="changePassword()">Ganti Password</button>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="admin_dasboard.js"></script>
+</body>
+</html>
