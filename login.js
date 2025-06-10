@@ -57,7 +57,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       const status = userData.status;
 
       if (status === "admin") {
-        window.location.href = "admin_dashboard.html";
+        window.location.href = "admin_dasboard.html";
       } else {
         window.location.href = "user_dashboard.html";
       }

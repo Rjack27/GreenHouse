@@ -62,3 +62,76 @@ window.changePassword = function () {
   set(ref(db, "settings/password"), newPassword);
   alert("Password berhasil diganti.");
 };
+
+const maxDataPoints = 10;
+
+const createChart = (ctx, label, color) => {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: label,
+        data: [],
+        borderColor: color,
+        backgroundColor: 'transparent',
+        tension: 0.3,
+      }]
+    },
+    options: {
+      scales: {
+        x: { ticks: { display: true } },
+        y: { beginAtZero: true }
+      }
+    }
+  });
+};
+
+const chartSuhu = createChart(document.getElementById('chartSuhu').getContext('2d'), 'Suhu (°C)', 'orange');
+const chartPH = createChart(document.getElementById('chartPH').getContext('2d'), 'pH', 'blue');
+const chartTDS = createChart(document.getElementById('chartTDS').getContext('2d'), 'TDS (ppm)', 'teal');
+const chartUltrasonic = createChart(document.getElementById('chartUltrasonic').getContext('2d'), 'Level Air (cm)', 'purple');
+
+const updateChart = (chart, value) => {
+  const time = new Date().toLocaleTimeString('id-ID');
+  chart.data.labels.push(time);
+  chart.data.datasets[0].data.push(value);
+
+  if (chart.data.labels.length > maxDataPoints) {
+    chart.data.labels.shift();
+    chart.data.datasets[0].data.shift();
+  }
+
+  chart.update();
+};
+
+// Simulasi pembaruan data sensor setiap 3 detik
+setInterval(() => {
+  const tdsValue = Math.floor(Math.random() * 1000);
+  const motorSpeed = Math.floor(Math.random() * 100);
+
+  document.getElementById('tdsValue').innerText = `${tdsValue} ppm`;
+  document.getElementById('motorSpeed').innerText = `${motorSpeed} %`;
+
+  updateChart(chartSuhu, Math.random() * 40);
+  updateChart(chartPH, (Math.random() * 3) + 5);
+  updateChart(chartTDS, tdsValue);
+  updateChart(chartUltrasonic, Math.random() * 100);
+}, 3000);
+
+const buttons = document.querySelectorAll(".accordion-button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const content = button.nextElementSibling;
+
+    // Close others
+    document.querySelectorAll(".accordion-content").forEach((el) => {
+      if (el !== content) el.style.display = "none";
+    });
+
+    // Toggle current
+    content.style.display =
+      content.style.display === "block" ? "none" : "block";
+  });
+});

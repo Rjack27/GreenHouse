@@ -30,11 +30,73 @@
         <p>Tanaman yang cocok dalam greenhouse termasuk tomat, paprika, selada, stroberi, dan berbagai tanaman herbal seperti basil dan mint.</p>
       </section>
 
+      <section id="sensor-info">
+    <h2>📟 Sensor pada Sistem Greenhouse</h2>
+    <p>Klik salah satu sensor untuk melihat detail dan datasheet:</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-button">🌡️ Sensor DHT11 (Suhu & Kelembaban)</button>
+        <div class="accordion-content">
+          <p>DHT11 digunakan untuk membaca suhu dan kelembaban lingkungan.</p>
+          <ul>
+            <li>Rentang suhu: 0 – 50°C</li>
+            <li>Kelembaban: 20 – 90% RH</li>
+            <li>Akurasi suhu: ±2°C</li>
+          </ul>
+          <a href="https://datasheet.lcsc.com/lcsc/1810121221_DFRobot-FIT0348_C123795.pdf" target="_blank">📄 Datasheet DHT11</a>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-button">💧 Sensor TDS</button>
+        <div class="accordion-content">
+          <p>Digunakan untuk mengukur zat terlarut dalam air.</p>
+          <ul>
+            <li>Rentang: 0 – 1000 ppm</li>
+            <li>Akurasi: ±10%</li>
+            <li>Voltase: 3.3 – 5V</li>
+          </ul>
+          <a href="https://wiki.dfrobot.com/TDS_Sensor_SKU__SEN0244" target="_blank">📄 Datasheet TDS</a>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-button">☀️ Sensor Cahaya (BH1750)</button>
+        <div class="accordion-content">
+          <p>Mendeteksi intensitas cahaya yang masuk.</p>
+          <ul>
+            <li>Rentang: 1 – 65535 lux</li>
+            <li>Komunikasi: I2C</li>
+            <li>Voltase: 3 – 5V</li>
+          </ul>
+          <a href="https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf" target="_blank">📄 Datasheet BH1750</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
       <section id="monitoring" class="hidden">
-        <h2>📊 Grafik Data Sensor</h2>
-        <p>Nilai TDS: <span id="tdsValue">Loading...</span></p>
-        <p>Kecepatan Motor: <span id="motorSpeed">Loading...</span></p>
-      </section>
+    <h2>📊 Grafik Data Sensor</h2>
+    <p>Nilai TDS: <span id="tdsValue">Loading...</span></p>
+    <p>Kecepatan Motor: <span id="motorSpeed">Loading...</span></p>
+
+    <div class="chart-grid">
+      <div class="chart-container">
+        <canvas id="chartSuhu"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartPH"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartTDS"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartUltrasonic"></canvas>
+      </div>
+    </div>
+  </section>
+
 
       <section id="control" class="hidden">
         <h2>🎛️ Kontrol</h2>
@@ -47,6 +109,7 @@
       <section id="setting" class="hidden">
         <h2>🔒 Ganti Password</h2>
         <label>Password Baru: <input type="password" id="newPassword"></label><br>
+        <label>Konfirmasi Password Baru: <input type="password" id="newPassword"></label><br>
         <button onclick="changePassword()">Ganti Password</button>
       </section>
     </main>

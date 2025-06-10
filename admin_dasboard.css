@@ -69,3 +69,109 @@ input, button {
   width: 100%;
   max-width: 400px;
 }
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+}
+
+#monitoring {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#monitoring h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#monitoring p {
+  text-align: center;
+  margin: 5px 0 15px;
+  font-size: 1rem;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.chart-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+canvas {
+  width: 100% !important;
+  height: 250px !important;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+h2 {
+  color: #006a4e;
+}
+
+.accordion {
+  margin-top: 20px;
+}
+
+.accordion-item {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #e9f5ec;
+  color: #333;
+  text-align: left;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.accordion-button:hover {
+  background-color: #d0ebdc;
+}
+
+.accordion-content {
+  padding: 15px;
+  display: none;
+  border-top: 1px solid #ccc;
+}
+
+.accordion-content ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
