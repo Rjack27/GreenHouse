@@ -1,0 +1,18 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+#pertanian {
+  background-color: #eaffea;
+  border-radius: 12px;
+}
+
+h2 {
+  color: #2e7d32;
+}
+
+.alert {
+  font-weight: 500;
+}

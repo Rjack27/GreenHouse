@@ -1,0 +1,22 @@
+body {
+  background: url('img/INS.jpg');
+  background-size: 500px;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+}
+
+.register-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}

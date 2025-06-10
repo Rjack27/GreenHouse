@@ -1,0 +1,18 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9ff;
+  color: #333;
+}
+
+#riset {
+  background-color: #eef2ff;
+  border-radius: 12px;
+}
+
+h2 {
+  color: #304ffe;
+}
+
+.alert {
+  font-weight: 500;
+}
