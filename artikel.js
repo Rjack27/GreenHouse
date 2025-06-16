@@ -2,17 +2,17 @@ const artikelData = [
   {
     judul: "Teknologi GreenHouse Modern",
     isi: "Menciptakan kondisi iklim yang optimal merupakan salah satu kunci dalam budidaya tanaman hortikultura, dan hal tersebut merupakan salah satu manfaat utama greenhouse.",
-    gambar: "https://www.netafim.co.id/greenhouses/greenhouse-technology/"
+    gambar: "img/teknologi.jpg"
   },
   {
     judul: "Budidaya Sayur Organik",
     isi: "Dengan sistem tanam hidroponik dalam greenhouse, hasil panen lebih cepat dan bebas pestisida.",
-    gambar: "https://source.unsplash.com/500x300/?organic,vegetables"
+    gambar: "img/budidaya sayur organic.jpg"
   },
   {
     judul: "Peluang Bisnis GreenHouse",
     isi: "Masyarakat mulai melirik bisnis rumah kaca untuk ketahanan pangan dan peningkatan ekonomi.",
-    gambar: "https://source.unsplash.com/500x300/?business,farming"
+    gambar: "img/bisnis.jpg"
   }
 ];
 
