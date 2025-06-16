@@ -5,7 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GreenHouse</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="index.css" />
+  <style>
+    .team-img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .team-img:hover {
+      transform: scale(1.05);
+    }
+
+    .team-section i {
+      font-size: 1.2rem;
+      color: #555;
+      transition: color 0.3s ease;
+      display: block;
+      margin-top: 8px;
+    }
+
+    .team-section i:hover {
+      color: #2e8b57;
+    }
+
+    .tentang-kami img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .underline {
+      width: 80px;
+      border: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
 
@@ -22,8 +61,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item"><a class="nav-link active" href="#">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Tentang Kami</a></li>
-          <li class="nav-item"><a class="nav-link" href="keunggulan GreenHouse.html">keunggulan GreenHouse</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tentangKami">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="#timKami">Tim Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="keunggulan GreenHouse.html">Keunggulan GreenHouse</a></li>
           <li class="nav-item"><a class="nav-link" href="artikel.html">Artikel</a></li>
           <li class="nav-item"><a class="btn btn-kontak" href="login.html">LOGIN</a></li>
         </ul>
@@ -31,11 +71,105 @@
     </div>
   </nav>
 
-<!-- Hero Section -->
-<section class="hero d-flex align-items-center justify-content-center" style="height: 100vh; background-color: #e0f7e9;">
-  <h1 class="text-center display-4 fw-bold">Selamat Datang di Website Kami!!!</h1>
-</section>
+  <!-- Hero Section -->
+  <section class="hero d-flex align-items-center justify-content-center" style="height: 100vh; background-color: #e0f7e9;">
+    <h1 class="text-center display-4 fw-bold">Selamat Datang di Website Kami!!!</h1>
+  </section>
 
+  <!-- Tentang Kami -->
+  <section id="tentangKami" class="tentang-kami py-5">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Tentang Kami</h2>
+      <hr class="underline mx-auto">
+      <div class="row align-items-center mt-4">
+        <!-- Teks -->
+        <div class="col-md-8">
+          <p>
+            Hidroponik adalah metode budidaya tanaman tanpa tanah, menggunakan larutan nutrisi yang disirkulasi secara terus-menerus. Teknik ini cocok untuk lahan sempit, seperti di perkotaan, dan memerlukan pemantauan nutrisi secara berkala agar tanaman tumbuh optimal.
+          </p>
+          <p>
+            Penelitian sebelumnya oleh Ike Fibriani dkk. (2020) mengkaji jaringan 4G LTE untuk sistem monitoring greenhouse berbasis IoT. Sementara itu, Grey M. Bonde (2021) menciptakan sistem otomatis untuk memantau suhu, kelembapan, dan pH tanah menggunakan sensor berbasis IoT.
+          </p>
+          <p>
+            Hafiz Julian Saputra (2023) mengembangkan sistem kendali dan monitoring pH hidroponik berbasis IoT dengan Wemos D1 R2 dan aplikasi Blynk. Sistem tersebut memungkinkan pemantauan pH secara jarak jauh dengan waktu respons sekitar 7,36 detik.
+          </p>
+          <p>
+            Penelitian ini mengusulkan <strong>"Sistem Monitoring Hidroponik NFT Pada Greenhouse"</strong> untuk membantu petani memantau kondisi nutrisi dan pH air secara efektif. Sistem ini meningkatkan efisiensi pemantauan, menghemat waktu, dan memastikan kondisi ideal bagi pertumbuhan tanaman hidroponik.
+          </p>
+        </div>
+        <!-- Gambar -->
+        <div class="col-md-4 text-center">
+          <img src="img/hidroponik.jpg" alt="Tanaman Hidroponik" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tim Kami -->
+  <section id="timKami" class="team-section py-5">
+    <div class="container">
+      <h2 class="text-center mb-3">Tim Kami</h2>
+      <p class="text-center mb-5">Berikut adalah anggota tim inti kami:</p>
+
+      <!-- Baris 1 -->
+      <div class="row text-center mb-4">
+        <div class="col-md-3">
+          <img src="img/fadhil.jpg" class="team-img" alt="Fadhil Alamsyah">
+          <h5 class="mt-3">Fadhil Alamsyah</h5>
+          <p>Ketua Tim</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/siti1.jpg" class="team-img" alt="Siti Nur'Aini">
+          <h5 class="mt-3">Siti Nur'Aini</h5>
+          <p>Anggota 1</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/siti2.jpg" class="team-img" alt="Siti Rahma Dira">
+          <h5 class="mt-3">Siti Rahma Dira</h5>
+          <p>Anggota 2</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/afrino.jpg" class="team-img" alt="Afrino Melas S">
+          <h5 class="mt-3">Afrino Melas S</h5>
+          <p>Anggota 3</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- Baris 2 -->
+      <div class="row text-center">
+        <div class="col-md-3">
+          <img src="img/Reza.jpg" class="team-img" alt="Muhammad Reza">
+          <h5 class="mt-3">Muhammad Reza</h5>
+          <p>Anggota 4</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/jelita.jpg" class="team-img" alt="Jelita Agnesia">
+          <h5 class="mt-3">Jelita Agnesia</h5>
+          <p>Anggota 5</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/melani.jpg" class="team-img" alt="Melani Silaban">
+          <h5 class="mt-3">Melani Silaban</h5>
+          <p>Anggota 6</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+        <div class="col-md-3">
+          <img src="img/baihaqi.jpg" class="team-img" alt="Muhammad Baihaqi A">
+          <h5 class="mt-3">Muhammad Baihaqi A</h5>
+          <p>Anggota 7</p>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="index.js"></script>
 </body>

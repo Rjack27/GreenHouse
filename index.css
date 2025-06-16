@@ -1,10 +1,10 @@
+/* Hero Section */
 .hero {
-  position: 500px;
   height: 100vh;
   color: white;
   font-size: 4rem;
   font-weight: bold;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -17,4 +17,74 @@
 
 .hero.visible {
   opacity: 1;
+}
+
+/* Tentang Kami */
+#tentangKami {
+  background-color: #fff;
+  color: #333;
+  line-height: 1.7;
+}
+
+#tentangKami h2 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.underline {
+  width: 80px;
+  border: 2px solid #ccc;
+  margin-bottom: 20px;
+}
+
+#tentangKami img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Tim Kami Section */
+.team-section {
+  background-color: #f8f9fa;
+}
+
+/* Gambar Tim */
+.team-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.team-img:hover {
+  transform: scale(1.05);
+}
+
+/* Ikon Sosial Media */
+.team-section i {
+  font-size: 1.2rem;
+  color: #555;
+  transition: color 0.3s ease;
+  display: block;
+  margin-top: 8px;
+}
+
+.team-section i:hover {
+  color: #2e8b57;
+}
+
+/* Animasi Muncul */
+#timKami,
+#tentangKami {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+#timKami.visible,
+#tentangKami.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
