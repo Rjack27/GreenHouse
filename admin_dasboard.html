@@ -1,12 +1,12 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Greenhouse Dashboard</title>
-  <link rel="stylesheet" href="admin_dasboard.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="admin_dasboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
@@ -17,103 +17,98 @@
           <li onclick="showSection('home')"><i class="fas fa-home"></i> Home</li>
           <li onclick="showSection('monitoring')"><i class="fas fa-chart-line"></i> Monitoring</li>
           <li onclick="showSection('control')"><i class="fas fa-sliders-h"></i> Kontrol</li>
+          <li onclick="showSection('log')"><i class="fas fa-history"></i> Riwayat</li>
           <li onclick="showSection('setting')"><i class="fas fa-cog"></i> Setting</li>
           <li><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
       </nav>
     </aside>
+
     <main class="main-content">
       <section id="home">
         <h2>📘 Studi Literatur Greenhouse</h2>
-        <p>Sistem greenhouse memanfaatkan teknologi untuk mengatur suhu, kelembaban, dan cahaya agar tanaman tumbuh optimal. Sensor umum yang digunakan termasuk TDS, suhu, kelembaban, dan cahaya.</p>
-        <p>Sensor TDS (Total Dissolved Solids) digunakan untuk mengukur konsentrasi zat terlarut dalam air. Motor digunakan untuk mengatur sirkulasi air atau pupuk.</p>
-        <p>Tanaman yang cocok dalam greenhouse termasuk tomat, paprika, selada, stroberi, dan berbagai tanaman herbal seperti basil dan mint.</p>
+        <p>Sistem greenhouse memanfaatkan teknologi untuk mengatur suhu, kelembaban, dan cahaya agar tanaman tumbuh optimal.</p>
+        <p>Sensor TDS digunakan untuk mengukur konsentrasi zat terlarut dalam air.</p>
       </section>
 
-      <section id="sensor-info">
-    <h2>📟 Sensor pada Sistem Greenhouse</h2>
-    <p>Klik salah satu sensor untuk melihat detail dan datasheet:</p>
-
-    <div class="accordion">
-      <div class="accordion-item">
-        <button class="accordion-button">🌡️ Sensor DHT11 (Suhu & Kelembaban)</button>
-        <div class="accordion-content">
-          <p>DHT11 digunakan untuk membaca suhu dan kelembaban lingkungan.</p>
-          <ul>
-            <li>Rentang suhu: 0 – 50°C</li>
-            <li>Kelembaban: 20 – 90% RH</li>
-            <li>Akurasi suhu: ±2°C</li>
-          </ul>
-          <a href="https://datasheet.lcsc.com/lcsc/1810121221_DFRobot-FIT0348_C123795.pdf" target="_blank">📄 Datasheet DHT11</a>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <button class="accordion-button">💧 Sensor TDS</button>
-        <div class="accordion-content">
-          <p>Digunakan untuk mengukur zat terlarut dalam air.</p>
-          <ul>
-            <li>Rentang: 0 – 1000 ppm</li>
-            <li>Akurasi: ±10%</li>
-            <li>Voltase: 3.3 – 5V</li>
-          </ul>
-          <a href="https://wiki.dfrobot.com/TDS_Sensor_SKU__SEN0244" target="_blank">📄 Datasheet TDS</a>
-        </div>
-      </div>
-
-      <div class="accordion-item">
-        <button class="accordion-button">☀️ Sensor Cahaya (BH1750)</button>
-        <div class="accordion-content">
-          <p>Mendeteksi intensitas cahaya yang masuk.</p>
-          <ul>
-            <li>Rentang: 1 – 65535 lux</li>
-            <li>Komunikasi: I2C</li>
-            <li>Voltase: 3 – 5V</li>
-          </ul>
-          <a href="https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf" target="_blank">📄 Datasheet BH1750</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
       <section id="monitoring" class="hidden">
-    <h2>📊 Grafik Data Sensor</h2>
-    <p>Grafik Pembacaan Sensor</p>
+        <h2>📊 Grafik Data Sensor</h2>
 
-    <div class="chart-grid">
-      <div class="chart-container">
-        <canvas id="chartSuhu"></canvas>
-        <p>Nilai TDS: <span id="tdsValue">Loading...</span></p>
-      </div>
-      <div class="chart-container">
-        <canvas id="chartPH"></canvas>
-        <p>Nilai PH: <span id="tdsValue">Loading...</span></p>
-      </div>
-      <div class="chart-container">
-        <canvas id="chartTDS"></canvas>
-        <p>Nilai HC-SR04: <span id="tdsValue">Loading...</span></p>
-      </div>
-      <div class="chart-container">
-        <canvas id="chartUltrasonic"></canvas>
-        <p>Nilai DHT11: <span id="tdsValue">Loading...</span></p>
-      </div>
-    </div>
-  </section>
+        <div class="tab-buttons">
+          <button onclick="showChartTab('realtimeCharts')">Grafik Real-Time</button>
+          <button onclick="showChartTab('historicalCharts')">Grafik Historis</button>
+        </div>
 
+        <div id="realtimeCharts">
+          <div class="chart-grid">
+            <div class="chart-container"><canvas id="chartSuhu"></canvas></div>
+            <div class="chart-container"><canvas id="chartPH"></canvas></div>
+            <div class="chart-container"><canvas id="chartTDS"></canvas></div>
+            <div class="chart-container"><canvas id="chartUltrasonic"></canvas></div>
+          </div>
+        </div>
+
+        <div id="historicalCharts" style="display:none;">
+          <div class="chart-grid">
+            <div class="chart-container"><canvas id="historicalChartSuhu"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartPH"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartTDS"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartUltrasonic"></canvas></div>
+          </div>
+          
+          <div style="margin-top: 30px;">
+            <h3>Status Sensor</h3>
+            <p>Suhu: <span id="tempValue">0</span>°C</p>
+            <p>pH: <span id="phValue">0</span></p>
+            <p>TDS: <span id="tdsValue">0</span> ppm</p>
+            <p>Level Air: <span id="waterLevelValue">0</span> cm</p>
+            <p>Kecepatan Motor: <span id="motorSpeed">0</span>%</p>
+        </div>
+        </div>
+      </section>
 
       <section id="control" class="hidden">
         <h2>🎛️ Kontrol</h2>
-        <label>Min TDS: <input type="number" id="minTds"></label><br>
-        <label>Max TDS: <input type="number" id="maxTds"></label><br>
-        <label>Kecepatan Motor: <input type="number" id="motorControl"></label><br>
+        <label>Min TDS: <input type="number" id="minTds"></label>
+        <label>Max TDS: <input type="number" id="maxTds"></label>
+        <label>Kecepatan Motor: <input type="number" id="motorControl" min="0" max="100"></label>
         <button onclick="updateControl()">Simpan</button>
       </section>
 
       <section id="setting" class="hidden">
         <h2>🔒 Ganti Password</h2>
-        <label>Password Baru: <input type="password" id="newPassword"></label><br>
-        <label>Konfirmasi Password Baru: <input type="password" id="newPassword"></label><br>
+        <label>Password Baru: <input type="password" id="newPassword"></label>
+        <label>Konfirmasi Password Baru: <input type="password" id="confirmPassword"></label>
         <button onclick="changePassword()">Ganti Password</button>
+      </section>
+
+      <section id="log" class="hidden">
+        <h2>📅 Riwayat & Log Data</h2>
+        <div class="filter">
+          <label for="filterType">Filter berdasarkan:</label>
+          <select id="filterType">
+            <option value="hari">Hari</option>
+            <option value="bulan">Bulan</option>
+          </select>
+
+          <input type="date" id="filterHari" />
+          <input type="month" id="filterBulan" style="display: none;" />
+
+          <button onclick="filterData()">Tampilkan</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Waktu</th>
+              <th>Aktivitas</th>
+            </tr>
+          </thead>
+          <tbody id="logTable">
+            <!-- Data akan diisi lewat JS -->
+          </tbody>
+        </table>
       </section>
     </main>
   </div>
