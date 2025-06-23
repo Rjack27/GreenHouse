@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Greenhouse Dashboard - User</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="user_dasboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2 class="logo">🌱 GreenHouse</h2>
+      <nav>
+        <ul>
+          <li onclick="showSection('home')"><i class="fas fa-home"></i> Home</li>
+          <li onclick="showSection('monitoring')"><i class="fas fa-chart-line"></i> Monitoring</li>
+          <li onclick="showSection('log')"><i class="fas fa-history"></i> Riwayat</li>
+          <li onclick="showSection('setting')"><i class="fas fa-cog"></i> Setting</li>
+          <li><i class="fas fa-sign-out-alt"></i> Logout</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section id="home">
+        <h2>📘 Studi Literatur Greenhouse</h2>
+        <p>Sistem greenhouse memanfaatkan teknologi untuk mengatur suhu, kelembaban, dan cahaya agar tanaman tumbuh optimal.</p>
+        <p>Sensor TDS digunakan untuk mengukur konsentrasi zat terlarut dalam air.</p>
+      </section>
+
+      <section id="monitoring" class="hidden">
+        <h2>📊 Grafik Data Sensor</h2>
+
+        <div class="tab-buttons">
+          <button onclick="showChartTab('realtimeCharts')">Grafik Real-Time</button>
+          <button onclick="showChartTab('historicalCharts')">Grafik Historis</button>
+        </div>
+
+        <div id="realtimeCharts">
+          <div class="chart-grid">
+            <div class="chart-container"><canvas id="chartSuhu"></canvas></div>
+            <div class="chart-container"><canvas id="chartPH"></canvas></div>
+            <div class="chart-container"><canvas id="chartTDS"></canvas></div>
+            <div class="chart-container"><canvas id="chartUltrasonic"></canvas></div>
+          </div>
+        </div>
+
+        <div id="historicalCharts" style="display:none;">
+          <div class="chart-grid">
+            <div class="chart-container"><canvas id="historicalChartSuhu"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartPH"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartTDS"></canvas></div>
+            <div class="chart-container"><canvas id="historicalChartUltrasonic"></canvas></div>
+          </div>
+          
+          <div style="margin-top: 30px;">
+            <h3>Status Sensor</h3>
+            <p>Suhu: <span id="tempValue">0</span>°C</p>
+            <p>pH: <span id="phValue">0</span></p>
+            <p>TDS: <span id="tdsValue">0</span> ppm</p>
+            <p>Level Air: <span id="waterLevelValue">0</span> cm</p>
+            <p>Kecepatan Motor: <span id="motorSpeed">0</span>%</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="setting" class="hidden">
+        <h2>🔒 Ganti Password</h2>
+        <label>Password Baru: <input type="password" id="newPassword"></label>
+        <label>Konfirmasi Password Baru: <input type="password" id="confirmPassword"></label>
+        <button onclick="changePassword()">Ganti Password</button>
+      </section>
+
+      <section id="log" class="hidden">
+        <h2>📅 Riwayat & Log Data</h2>
+        <div class="filter">
+          <label for="filterType">Filter berdasarkan:</label>
+          <select id="filterType">
+            <option value="hari">Hari</option>
+            <option value="bulan">Bulan</option>
+          </select>
+
+          <input type="date" id="filterHari" />
+          <input type="month" id="filterBulan" style="display: none;" />
+
+          <button onclick="filterData()">Tampilkan</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Waktu</th>
+              <th>Aktivitas</th>
+            </tr>
+          </thead>
+          <tbody id="logTable">
+            <!-- Data diisi melalui JS -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="user_dasboard.js"></script>
+</body>
+</html>

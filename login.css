@@ -1,7 +1,6 @@
 body {
-  background: url('img/bacground.jpg');
-  background-size: 1250px;
-  background-repeat: no-repeat;
+  background: url('img/bacground.jpg') no-repeat;
+  background-size: cover;
   background-position: center;
   height: 100vh;
   margin: 0;
