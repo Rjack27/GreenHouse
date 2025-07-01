@@ -19,7 +19,7 @@
           <li onclick="showSection('control')"><i class="fas fa-sliders-h"></i> Kontrol</li>
           <li onclick="showSection('log')"><i class="fas fa-history"></i> Riwayat</li>
           <li onclick="showSection('setting')"><i class="fas fa-cog"></i> Setting</li>
-          <li><i class="fas fa-sign-out-alt"></i> Logout</li>
+          <li id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
       </nav>
     </aside>
@@ -33,12 +33,10 @@
 
       <section id="monitoring" class="hidden">
         <h2>📊 Grafik Data Sensor</h2>
-
         <div class="tab-buttons">
           <button onclick="showChartTab('realtimeCharts')">Grafik Real-Time</button>
           <button onclick="showChartTab('historicalCharts')">Grafik Historis</button>
         </div>
-
         <div id="realtimeCharts">
           <div class="chart-grid">
             <div class="chart-container"><canvas id="chartSuhu"></canvas></div>
@@ -47,7 +45,6 @@
             <div class="chart-container"><canvas id="chartUltrasonic"></canvas></div>
           </div>
         </div>
-
         <div id="historicalCharts" style="display:none;">
           <div class="chart-grid">
             <div class="chart-container"><canvas id="historicalChartSuhu"></canvas></div>
@@ -55,7 +52,6 @@
             <div class="chart-container"><canvas id="historicalChartTDS"></canvas></div>
             <div class="chart-container"><canvas id="historicalChartUltrasonic"></canvas></div>
           </div>
-          
           <div style="margin-top: 30px;">
             <h3>Status Sensor</h3>
             <p>Suhu: <span id="tempValue">0</span>°C</p>
@@ -63,7 +59,7 @@
             <p>TDS: <span id="tdsValue">0</span> ppm</p>
             <p>Level Air: <span id="waterLevelValue">0</span> cm</p>
             <p>Kecepatan Motor: <span id="motorSpeed">0</span>%</p>
-        </div>
+          </div>
         </div>
       </section>
 
@@ -90,14 +86,14 @@
             <option value="hari">Hari</option>
             <option value="bulan">Bulan</option>
           </select>
-
           <input type="date" id="filterHari" />
           <input type="month" id="filterBulan" style="display: none;" />
-
-          <button onclick="filterData()">Tampilkan</button>
+          <div class="button-group">
+            <button onclick="filterData()" class="btn btn-primary">Tampilkan</button>
+            <button id="downloadExcel" class="btn btn-success">Download Excel</button>
+          </div>
         </div>
-
-        <table>
+        <table id="logTableElement">
           <thead>
             <tr>
               <th>Tanggal</th>
@@ -113,6 +109,9 @@
     </main>
   </div>
 
+  <!-- SheetJS CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="log.js"></script>
   <script type="module" src="admin_dasboard.js"></script>
 </body>
 </html>
