@@ -367,3 +367,24 @@ button {
 button:hover {
   background: #218838;
 }
+.btn-download {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+/* Tombol kecil */
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+/* Posisi horizontal & rapi */
+.button-group-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}

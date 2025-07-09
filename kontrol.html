@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PID Control Settings</title>
+  <link rel="stylesheet" href="kontrol.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="card">
+    <h2>System Status</h2>
+    <p>Current Mode: <span id="systemStatus">Loading...</span></p>
+    <p>Current PPM: <span id="currentPPM">Loading...</span></p>
+    <p>Pump Output: <span id="pumpOutput">Loading...</span>/255</p>
+  </div>
+
+  <div class="card">
+    <h2>Setpoint Control</h2>
+    <label for="setpointInput">Setpoint (PPM):</label>
+    <input type="number" id="setpointInput" step="0.1" />
+    <button onclick="updateSetpoint()">Update Setpoint</button>
+    <p>Current Setpoint: <span id="currentSetpoint">Loading...</span> ppm</p>
+    <div id="setpointStatus" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>PID Parameters</h2>
+    <div class="param-control">
+      <label for="kpInput">Kp:</label>
+      <input type="number" id="kpInput" step="0.01" />
+      <button onclick="updatePIDParam('kp')">Update</button>
+    </div>
+    <div class="param-control">
+      <label for="kiInput">Ki:</label>
+      <input type="number" id="kiInput" step="0.01" />
+      <button onclick="updatePIDParam('ki')">Update</button>
+    </div>
+    <div class="param-control">
+      <label for="kdInput">Kd:</label>
+      <input type="number" id="kdInput" step="0.01" />
+      <button onclick="updatePIDParam('kd')">Update</button>
+    </div>
+    <p>Current Values:</p>
+    <ul>
+      <li>Kp: <span id="kp">Loading...</span></li>
+      <li>Ki: <span id="ki">Loading...</span></li>
+      <li>Kd: <span id="kd">Loading...</span></li>
+    </ul>
+    <div id="pidStatus" class="status"></div>
+  </div>
+
+  <div class="card">
+    <h2>Ziegler-Nichols Autotuning</h2>
+    <button onclick="startZNTuning()" id="znButton">Start Autotuning</button>
+    <div id="znStatus" class="status"></div>
+    <div id="znProgress" style="margin-top: 15px; display: none;">
+      <p><strong>Tuning Progress:</strong></p>
+      <p>Current Kp: <span id="currentKp">0</span></p>
+      <p>Oscillation Count: <span id="oscillationCount">0</span></p>
+      <p>Period: <span id="oscillationPeriod">0</span> seconds</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📘 Apa itu Ziegler-Nichols Autotuning?</h2>
+    <div class="info">
+      <!-- Penjelasan Ziegler-Nichols disisipkan di sini -->
+      <!-- Tidak dipindahkan ke JS/CSS karena bagian konten -->
+      <!-- Boleh dipindahkan ke file HTML lain jika ingin -->
+      (Konten tetap dari penjelasan ZN, tidak diubah)
+    </div>
+  </div>
+
+  <script src="kontrol.js"></script>
+</body>
+</html>

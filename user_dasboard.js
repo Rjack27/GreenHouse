@@ -289,3 +289,24 @@ renderHistoricalChart('log_ultrasonic', 'historicalChartUltrasonic', 'Grafik Lev
 // Initialize the page
 showSection('home');
 showChartTab('realtimeCharts');
+// Tombol download Excel
+document.getElementById("downloadExcel").addEventListener("click", function () {
+  const table = document.getElementById("logTableElement");
+  const wb = XLSX.utils.table_to_book(table, { sheet: "Riwayat Log" });
+  XLSX.writeFile(wb, "riwayat_log_data.xlsx");
+});
+// Fungsi Logout
+document.getElementById("logoutBtn").addEventListener("click", function () {
+  // Bersihkan sesi jika ada
+  localStorage.clear(); // atau sessionStorage.clear();
+
+  // Arahkan kembali ke halaman index.html
+  window.location.href = "index.html";
+});
+document.getElementById("logoutBtn").addEventListener("click", function () {
+  const konfirmasi = confirm("Apakah Anda yakin ingin logout?");
+  if (konfirmasi) {
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+});
