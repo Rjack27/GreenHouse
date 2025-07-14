@@ -42,3 +42,7 @@ function handleScrollAnimation() {
 
 // Event listener untuk animasi scroll
 window.addEventListener('scroll', handleScrollAnimation);
+// Menampilkan tahun secara otomatis
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("tahun").textContent = new Date().getFullYear();
+});

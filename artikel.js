@@ -1,36 +1,30 @@
 const artikelData = [
   {
-    judul: "Teknologi GreenHouse Modern",
-    isi: "Menciptakan kondisi iklim yang optimal merupakan salah satu kunci dalam budidaya tanaman hortikultura, dan hal tersebut merupakan salah satu manfaat utama greenhouse.",
-    gambar: "img/teknologi.jpg"
+    judul: "Pengertian dan Berbagai Manfaat Greenhouse untuk Tanaman ",
+    gambar: "img/Greenhouse.jpeg",
+    link: "https://www.gramedia.com/literasi/manfaat-greenhouse/?srsltid=AfmBOoqApDqyil_epKa90aLVrO3Cr_JAv33ABYRAV0IW3KOZNl3p-fC5"
   },
   {
-    judul: "Budidaya Sayur Organik",
-    isi: "Dengan sistem tanam hidroponik dalam greenhouse, hasil panen lebih cepat dan bebas pestisida.",
-    gambar: "img/budidaya sayur organic.jpg"
+    judul: "Mengenal Lebih Jauh dan Monitoring Pembanguna Smart Greenhouse",
+    gambar: "img/Smart.jpg",
+    link: "https://dinkpp.lamongankab.go.id/posting/19631#:~:text=Dengan%20sistem%20ini%2C%20petani%20atau,air%2C%20serta%20peningkatan%20hasil%20pertanian."
   },
   {
-    judul: "Peluang Bisnis GreenHouse",
-    isi: "Masyarakat mulai melirik bisnis rumah kaca untuk ketahanan pangan dan peningkatan ekonomi.",
-    gambar: "img/bisnis.jpg"
+    judul: "Pengertian Greenhouse Lengkap dengan Fungsi, Manfaat, dan Ketentuannya",
+    gambar: "img/house.jpeg",
+    link: "https://www.detik.com/jogja/berita/d-7543040/pengertian-greenhouse-lengkap-dengan-fungsi-manfaat-dan-ketentuannya"
   }
 ];
 
 const artikelList = document.getElementById("artikel-list");
 
-artikelData.forEach((artikel) => {
-  const col = document.createElement("div");
-  col.className = "col-md-4";
-
-  col.innerHTML = `
-    <div class="card h-100 shadow-sm">
-      <img src="${artikel.gambar}" class="card-img-top" alt="Gambar Artikel">
-      <div class="card-body">
-        <h5 class="card-title">${artikel.judul}</h5>
-        <p class="card-text">${artikel.isi}</p>
-      </div>
-    </div>
+artikelData.forEach(artikel => {
+  const div = document.createElement("div");
+  div.className = "artikel-item";
+  div.innerHTML = `
+    <img src="${artikel.gambar}" alt="${artikel.judul}" />
+    <h3>${artikel.judul}</h3>
+    <a href="${artikel.link}" target="_blank">Baca Selengkapnya</a>
   `;
-
-  artikelList.appendChild(col);
+  artikelList.appendChild(div);
 });
