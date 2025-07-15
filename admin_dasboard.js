@@ -1,16 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
-import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
 
 // Konfigurasi Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDKzX5Z2MPAabKkrTYuXvdRr8cqYbDhoWM",
-  authDomain: "grow-iot-8fba8.firebaseapp.com",
-  databaseURL: "https://grow-iot-8fba8-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "grow-iot-8fba8",
-  storageBucket: "grow-iot-8fba8.appspot.com",
-  messagingSenderId: "455814807543",
-  appId: "1:455814807543:web:18f406aaeae13dee3b78f2",
-  measurementId: "G-RTRHSX4E70"
+  apiKey: "AIzaSyAL3l3Fb9_Q1CAkjwxEBvG6Tb1W-HJwUCI",
+  authDomain: "hqchulo.firebaseapp.com",
+  databaseURL: "https://hqchulo-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hqchulo",
+  storageBucket: "hqchulo.firebasestorage.app",
+  messagingSenderId: "1008179913372",
+  appId: "1:1008179913372:web:be2b758dfc42ee61544359",
+  measurementId: "G-LE5GX298ZJ"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -46,15 +46,30 @@ window.changePassword = function() {
     .catch(error => alert("Error mengganti password: " + error.message));
 };
 
-// Data Log Dummy
-const dataLog = [
-  { tanggal: '2025-06-18', waktu: '08:00', aktivitas: 'Sensor aktif' },
-  { tanggal: '2025-06-18', waktu: '12:00', aktivitas: 'Penyiraman otomatis' },
-  { tanggal: '2025-06-17', waktu: '10:00', aktivitas: 'Sensor mati' },
-  { tanggal: '2025-05-25', waktu: '14:00', aktivitas: 'Maintenance rutin' },
-  { tanggal: '2025-05-01', waktu: '09:00', aktivitas: 'Pengecekan suhu' },
-];
+// Data Log dari Firebase
+let dataLog = [];
 
+// Baca Riwayat dari Firebase
+const logRef = ref(db, 'HQ/RIWAYAT');
+onValue(logRef, (snapshot) => {
+  dataLog = [];
+
+  snapshot.forEach(tanggalSnap => {
+    const tanggal = tanggalSnap.key;
+    tanggalSnap.forEach(entrySnap => {
+      const entry = entrySnap.val();
+      dataLog.push({
+        tanggal: tanggal,
+        waktu: entry.waktu,
+        aktivitas: `PPM: ${entry.ppm}, Suhu: ${entry.suhu}, pH: ${entry.ph}, PWM: ${entry.pwm}`
+      });
+    });
+  });
+
+  renderTable(dataLog);
+});
+
+// Fungsi Tabel
 function renderTable(filteredData = dataLog) {
   const tbody = document.getElementById('riwayatBody');
   tbody.innerHTML = '';
@@ -75,6 +90,7 @@ function renderTable(filteredData = dataLog) {
   });
 }
 
+// Filter Data
 function filterData() {
   const filterType = document.getElementById('filterType').value;
   let filtered = [];
@@ -92,18 +108,21 @@ function filterData() {
 
 window.filterData = filterData;
 
+// Event Filter
 document.getElementById('filterType').addEventListener('change', function () {
   const type = this.value;
   document.getElementById('filterHari').style.display = type === 'hari' ? 'inline-block' : 'none';
   document.getElementById('filterBulan').style.display = type === 'bulan' ? 'inline-block' : 'none';
 });
 
+// Export ke Excel
 document.getElementById("downloadExcel").addEventListener("click", function () {
   const table = document.getElementById("logTableElement");
   const wb = XLSX.utils.table_to_book(table, { sheet: "Riwayat Log" });
   XLSX.writeFile(wb, "riwayat_log_data.xlsx");
 });
 
+// Logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
   const konfirmasi = confirm("Apakah Anda yakin ingin logout?");
   if (konfirmasi) {
@@ -112,5 +131,5 @@ document.getElementById("logoutBtn").addEventListener("click", function () {
   }
 });
 
-// Default tampilan saat pertama kali dibuka
+// Default tampilan
 showSection('home');

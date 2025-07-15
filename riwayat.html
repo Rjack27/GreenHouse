@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Riwayat Monitoring Sensor</title>
+  <link rel="stylesheet" href="riwayat.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Riwayat dan Log Monitoring Sensor</h1>
+    <label for="tanggal">Pilih Tanggal:</label>
+    <input type="date" id="tanggal" />
+
+    <button onclick="tampilkanRiwayat()">Tampilkan</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Waktu</th>
+          <th>Nilai Sensor</th>
+        </tr>
+      </thead>
+      <tbody id="logData">
+        <!-- Data akan ditampilkan di sini -->
+      </tbody>
+    </table>
+  </div>
+
+  <script type="module" src="riwayat.js"></script>
+</body>
+</html>

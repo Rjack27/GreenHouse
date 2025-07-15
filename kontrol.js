@@ -1,7 +1,7 @@
 // Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyDKzX5Z2MPAabKkrTYuXvdRr8cqYbDhoWM",
-  databaseURL: "https://grow-iot-8fba8-default-rtdb.asia-southeast1.firebasedatabase.app/"
+  apiKey: "AIzaSyAL3l3Fb9_Q1CAkjwxEBvG6Tb1W-HJwUCI",
+  databaseURL: "https://hqchulo-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
 firebase.initializeApp(firebaseConfig);
