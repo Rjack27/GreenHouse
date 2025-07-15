@@ -1,7 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-
-// Firebase Config
+// Konfigurasi Firebase (UPDATE)
 const firebaseConfig = {
   apiKey: "AIzaSyAL3l3Fb9_Q1CAkjwxEBvG6Tb1W-HJwUCI",
   authDomain: "hqchulo.firebaseapp.com",
@@ -14,37 +11,37 @@ const firebaseConfig = {
 };
 
 // Inisialisasi Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
 // Setup Chart.js
-const ctx = document.getElementById("stepResponseChart").getContext("2d");
+const ctx = document.getElementById('stepResponseChart').getContext('2d');
 const data = {
   labels: [],
   datasets: [
     {
-      label: "PPM Output (ppm)",
+      label: 'PPM Output (ppm)',
       data: [],
-      borderColor: "blue",
+      borderColor: 'blue',
       borderWidth: 2,
       fill: false,
       tension: 0.4,
-      pointRadius: 0,
+      pointRadius: 0
     },
     {
-      label: "Setpoint",
+      label: 'Setpoint',
       data: [],
-      borderColor: "red",
+      borderColor: 'red',
       borderDash: [5, 5],
       borderWidth: 2,
       fill: false,
-      pointRadius: 0,
+      pointRadius: 0
     }
   ]
 };
 
 const chart = new Chart(ctx, {
-  type: "line",
+  type: 'line',
   data: data,
   options: {
     animation: false,
@@ -52,12 +49,12 @@ const chart = new Chart(ctx, {
     maintainAspectRatio: false,
     scales: {
       x: {
-        title: { display: true, text: "Time (seconds)" }
+        title: { display: true, text: 'Time (seconds)' }
       },
       y: {
-        title: { display: true, text: "PPM" },
+        title: { display: true, text: 'PPM' },
         suggestedMin: 0,
-        suggestedMax: 1000
+        suggestedMax: 600
       }
     }
   }
@@ -65,59 +62,83 @@ const chart = new Chart(ctx, {
 
 let startTime = Date.now();
 
-// Listener data realtime
-const sensorRef = ref(db, "SENSOR");
-onValue(sensorRef, (snapshot) => {
-  const sensor = snapshot.val();
-  if (!sensor) return;
+function updateData() {
+  console.log("🟡 Memulai updateData()");
 
   const now = new Date();
   const waktu = now.toLocaleTimeString();
 
-  const ppm = parseFloat(sensor.tds) || 0;
-  const pwm = parseFloat(sensor.output_pid) || 0;
-  const suhu = parseFloat(sensor.suhu) || 0;
-  const setpoint = parseFloat(sensor.setpoint) || 0;
-  const ph = parseFloat(sensor.ph) || 0;
-  const tinggi = parseFloat(sensor.tinggi_air) || 0;
+  Promise.all([
+    db.ref("HQ/SENSOR/tds").get(),
+    db.ref("HQ/CONTROL/output_pid").get(),
+    db.ref("HQ/SENSOR/temperature").get(),
+    db.ref("HQ/CONTROL/setpoin").get(),
+    db.ref("HQ/SENSOR/ph").get(),
+    db.ref("HQ/SENSOR/tinggi_air").get()
+  ])
+    .then(([ppmSnap, pwmSnap, suhuSnap, setpointSnap, phSnap, tinggiSnap]) => {
+      const ppm = parseFloat(ppmSnap.val()) || 0;
+      const pwm = parseFloat(pwmSnap.val()) || 0;
+      const suhu = parseFloat(suhuSnap.val()) || 0;
+      const setpoint = parseFloat(setpointSnap.val()) || 0;
+      const ph = parseFloat(phSnap.val()) || 0;
+      const tinggi = parseFloat(tinggiSnap.val()) || 0;
 
-  // Update info panel
-  document.getElementById("ppmValue").textContent = ppm.toFixed(2);
-  document.getElementById("pwmValue").textContent = pwm.toFixed(0);
-  document.getElementById("suhuValue").textContent = suhu.toFixed(1);
-  document.getElementById("setpointValue").textContent = setpoint.toFixed(2);
-  document.getElementById("phValue").textContent = ph.toFixed(2);
-  document.getElementById("tinggiAirValue").textContent = tinggi.toFixed(1);
+      console.log("✅ Data sensor berhasil dibaca");
+      console.log(`   PPM: ${ppm}, PWM: ${pwm}, Suhu: ${suhu}, Setpoint: ${setpoint}, pH: ${ph}, Ketinggian: ${tinggi}`);
 
-  // Update grafik
-  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  data.labels.push(elapsed);
-  data.datasets[0].data.push(ppm);
-  data.datasets[1].data.push(setpoint);
-  if (data.labels.length > 50) {
-    data.labels.shift();
-    data.datasets[0].data.shift();
-    data.datasets[1].data.shift();
-  }
-  chart.update();
+      // Update grafik
+      const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      data.labels.push(elapsed);
+      data.datasets[0].data.push(ppm);
+      data.datasets[1].data.push(setpoint);
+      if (data.labels.length > 50) {
+        data.labels.shift();
+        data.datasets[0].data.shift();
+        data.datasets[1].data.shift();
+      }
+      chart.update();
 
-  // Simpan ke RIWAYAT dan log harian
-  const tanggal = now.toISOString().split("T")[0];
-  const jam = now.toTimeString().substring(0, 8).replace(/:/g, "-");
+      // Update tampilan nilai
+      document.getElementById("ppmValue").textContent = ppm.toFixed(2);
+      document.getElementById("pwmValue").textContent = pwm.toFixed(0);
+      document.getElementById("tempValue").textContent = suhu.toFixed(1);
+      document.getElementById("setpointValue").textContent = setpoint.toFixed(2);
+      document.getElementById("phValue").textContent = ph.toFixed(2);
+      document.getElementById("tinggiValue").textContent = tinggi.toFixed(1);
 
-  set(ref(db, `HQ/RIWAYAT/${tanggal}/${jam}`), {
-    waktu,
-    ppm,
-    setpoint,
-    pwm,
-    suhu,
-    ph,
-    tinggi
-  });
+      // Simpan ke Firebase sebagai riwayat
+      const tanggal = now.toISOString().split("T")[0];
+      const jamMenitDetik = now.toTimeString().substring(0, 8).replace(/:/g, "-");
 
-  const timestamp = Date.now();
-  set(ref(db, `log_suhu/${timestamp}`), { waktu: timestamp, nilai: suhu });
-  set(ref(db, `log_ph/${timestamp}`), { waktu: timestamp, nilai: ph });
-  set(ref(db, `log_tds/${timestamp}`), { waktu: timestamp, nilai: ppm });
-  set(ref(db, `log_ultrasonic/${timestamp}`), { waktu: timestamp, nilai: tinggi });
-});
+      console.log("🚀 Menyimpan ke RIWAYAT Firebase...");
+      db.ref(`HQ/RIWAYAT/${tanggal}/${jamMenitDetik}`).set({
+        waktu,
+        ppm,
+        setpoint,
+        pwm,
+        suhu,
+        ph,
+        tinggi
+      })
+        .then(() => {
+          console.log("✅ Data RIWAYAT berhasil disimpan");
+        })
+        .catch(err => {
+          console.error("❌ Gagal menyimpan ke RIWAYAT:", err);
+        });
+
+      // Simpan juga ke log sensor
+      const timestamp = Date.now();
+      db.ref(`log_suhu/${timestamp}`).set({ waktu: timestamp, nilai: suhu });
+      db.ref(`log_ph/${timestamp}`).set({ waktu: timestamp, nilai: ph });
+      db.ref(`log_tds/${timestamp}`).set({ waktu: timestamp, nilai: ppm });
+      db.ref(`log_ultrasonic/${timestamp}`).set({ waktu: timestamp, nilai: tinggi });
+    })
+    .catch(err => {
+      console.error("❌ Gagal membaca data dari Firebase:", err);
+    });
+}
+
+// Jalankan setiap 5 detik
+setInterval(updateData, 5000);
