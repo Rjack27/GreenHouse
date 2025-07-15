@@ -5,14 +5,14 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.9.0
 
 // Konfigurasi Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDKzX5Z2MPAabKkrTYuXvdRr8cqYbDhoWM",
-  authDomain: "grow-iot-8fba8.firebaseapp.com",
-  databaseURL: "https://grow-iot-8fba8-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "grow-iot-8fba8",
-  storageBucket: "grow-iot-8fba8.firebasestorage.app",
-  messagingSenderId: "455814807543",
-  appId: "1:455814807543:web:18f406aaeae13dee3b78f2",
-  measurementId: "G-RTRHSX4E70"
+  apiKey: "AIzaSyAL3l3Fb9_Q1CAkjwxEBvG6Tb1W-HJwUCI",
+  authDomain: "hqchulo.firebaseapp.com",
+  databaseURL: "https://hqchulo-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "hqchulo",
+  storageBucket: "hqchulo.firebasestorage.app",
+  messagingSenderId: "1008179913372",
+  appId: "1:1008179913372:web:be2b758dfc42ee61544359",
+  measurementId: "G-LE5GX298ZJ"
 };
 
 // Inisialisasi Firebase
