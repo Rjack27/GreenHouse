@@ -127,9 +127,12 @@ document.getElementById("logoutBtn").addEventListener("click", function () {
   const konfirmasi = confirm("Apakah Anda yakin ingin logout?");
   if (konfirmasi) {
     localStorage.clear();
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 });
 
 // Default tampilan
 showSection('home');
+function openDatasheet(path) {
+  window.open(path, '_blank');
+}

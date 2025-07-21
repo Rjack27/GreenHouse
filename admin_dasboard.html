@@ -14,29 +14,18 @@
 </head>
 <body>
   <div class="container">
+
     <!-- Sidebar -->
     <aside class="sidebar">
       <h2 class="logo">🌱 GreenHouse</h2>
       <nav>
         <ul>
-          <li onclick="showSection('home')">
-            <i class="fas fa-home"></i> Home
-          </li>
-          <li onclick="location.href='monitoring.html'">
-            <i class="fas fa-chart-line"></i> Monitoring
-          </li>
-          <li onclick="location.href='kontrol.html'">
-            <i class="fas fa-sliders-h"></i> Kontrol
-          </li>
-          <li onclick="showSection('log')">
-            <i class="fas fa-history"></i> Riwayat
-          </li>
-          <li onclick="showSection('setting')">
-            <i class="fas fa-cog"></i> Setting
-          </li>
-          <li id="logoutBtn">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </li>
+          <li onclick="showSection('home')"><i class="fas fa-home"></i> Home</li>
+          <li onclick="location.href='monitoring.html'"><i class="fas fa-chart-line"></i> Monitoring</li>
+          <li onclick="location.href='kontrol.html'"><i class="fas fa-sliders-h"></i> Kontrol</li>
+          <li onclick="showSection('log')"><i class="fas fa-history"></i> Riwayat</li>
+          <li onclick="showSection('setting')"><i class="fas fa-cog"></i> Setting</li>
+          <li id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
       </nav>
     </aside>
@@ -47,15 +36,84 @@
       <!-- Home Section -->
       <section id="home">
         <h2>📘 Studi Literatur Greenhouse</h2>
-        <p>Sistem greenhouse memanfaatkan teknologi untuk mengatur suhu, kelembaban, dan cahaya agar tanaman tumbuh optimal.</p>
-        <p>Sensor TDS digunakan untuk mengukur konsentrasi zat terlarut dalam air.</p>
+        <p><strong>Greenhouse</strong> atau rumah kaca adalah struktur yang dirancang untuk mengatur lingkungan tumbuh tanaman agar optimal, seperti suhu, kelembaban, dan pencahayaan. Ini memungkinkan pertanian dan perkebunan dilakukan sepanjang tahun tanpa tergantung cuaca atau musim.</p>
+        <p>Dalam praktiknya, greenhouse bisa menggunakan dua jenis media utama untuk budidaya tanaman: <strong>media tanah</strong> dan <strong>media air (hidroponik)</strong>.</p>
+
+        <!-- Spasi kosong sebelum Datasheet -->
+        <br><br><br><br><br>
+
+        <h3>📊 Perbandingan Media Tanah vs Media Air (Hidroponik)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek</th>
+              <th>Media Tanah</th>
+              <th>Media Air (Hidroponik)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Definisi</td><td>Tanaman tumbuh di tanah secara langsung atau dalam pot</td><td>Tanaman tumbuh dalam larutan air berisi nutrisi</td></tr>
+            <tr><td>Nutrisi</td><td>Diperoleh dari unsur hara tanah</td><td>Disuplai secara langsung melalui larutan</td></tr>
+            <tr><td>Kebutuhan Air</td><td>Lebih banyak karena tanah menyerap air</td><td>Lebih hemat, sistem sirkulasi efisien</td></tr>
+            <tr><td>Pengendalian Hama</td><td>Lebih rentan terhadap hama tanah</td><td>Lingkungan lebih bersih, risiko hama lebih kecil</td></tr>
+            <tr><td>Pertumbuhan</td><td>Relatif lambat tergantung kesuburan tanah</td><td>Lebih cepat karena nutrisi terkontrol</td></tr>
+            <tr><td>Perawatan</td><td>Perlu penyiangan dan pemupukan rutin</td><td>Perlu pemantauan pH, TDS, dan nutrisi</td></tr>
+            <tr><td>Biaya Awal</td><td>Relatif rendah</td><td>Lebih tinggi karena memerlukan alat dan sistem</td></tr>
+            <tr><td>Hasil Panen</td><td>Tergantung cuaca dan musim</td><td>Konsisten dan bisa sepanjang tahun</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Spasi kosong sebelum Datasheet -->
+        <br><br><br><br><br>
+
+        <h3>📌 Kesimpulan</h3>
+        <p>Greenhouse modern sangat cocok dipadukan dengan sistem hidroponik dan teknologi sensor (TDS, suhu, pH) untuk menciptakan pertanian yang efisien, produktif, dan ramah lingkungan.</p>
+
+        <!-- Spasi kosong sebelum Datasheet -->
+        <br><br><br><br><br>
+
+        <h3>📄 Datasheet Sensor</h3>
+        <section class="sensor-cards">
+          <div class="sensor-card" onclick="openDatasheet('https://www.farnell.com/datasheets/3161977.pdf')">
+            <img src="img/TDS.jpg" alt="TDS Sensor">
+            <h3>Sensor TDS</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://www.handsontec.com/dataspecs/sensor/DHT11%20Humidity%20Temp%20Sensor.pdf')">
+            <img src="img/dht11.jpg" alt="Humidity Temp Sensor">
+            <h3>Sensor DHT 11</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://media.digikey.com/pdf/Data%20Sheets/DFRobot%20PDFs/SEN0161-V2_Web.pdf')">
+            <img src="img/ph.jpg" alt="pH Sensor">
+            <h3>Sensor pH</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://www.handsontec.com/dataspecs/L298N%20Motor%20Driver.pdf')">
+            <img src="img/l298n.jpg" alt="Motor Driver">
+            <h3>Motor Driver</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://www.handsontec.com/dataspecs/HC-SR04-Ultrasonic.pdf')">
+            <img src="img/ultrasonic.jpg" alt="ultrasonic Sensor">
+            <h3>HC-SR04 Sensor</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://files.oaiusercontent.com/file-5A4wJqcmoJzWUKKt9CJ8G6?se=2025-07-21T10%3A32%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D299%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3DDatasheet_Pompa_Peristaltik_DP_DIY_INTLLAB.pdf&sig=MXoHMM67vH1V0RKgGyn%2Baw6D2FbGod0UyM2ePpS5GCg%3D')">
+            <img src="img/pompa.jpeg" alt="Pompa Peristaltik">
+            <h3>Pompa Peristaltik</h3>
+          </div>
+          <div class="sensor-card" onclick="openDatasheet('https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32/esp-dev-kits-en-master-esp32.pdf')">
+            <img src="img/ESP.jpg" alt="NodeMCU ESP32">
+            <h3>NodeMCU ESP32</h3>
+          </div>
+        </section>
       </section>
 
       <!-- Setting Section -->
       <section id="setting" class="hidden">
         <h2>🔒 Ganti Password</h2>
-        <label>Password Baru: <input type="password" id="newPassword"></label>
-        <label>Konfirmasi Password Baru: <input type="password" id="confirmPassword"></label>
+        <label>Password Baru:
+          <input type="password" id="newPassword">
+        </label>
+        <label>Konfirmasi Password Baru:
+          <input type="password" id="confirmPassword">
+        </label>
         <button onclick="changePassword()">Ganti Password</button>
       </section>
 
@@ -68,10 +126,8 @@
             <option value="hari">Hari</option>
             <option value="bulan">Bulan</option>
           </select>
-
           <input type="date" id="filterHari" />
           <input type="month" id="filterBulan" style="display: none;" />
-
           <div class="button-group">
             <button onclick="filterData()" class="btn btn-primary">Tampilkan</button>
             <button id="downloadExcel" class="btn btn-success">Download Excel</button>
@@ -100,9 +156,15 @@
     </main>
   </div>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="log.js"></script>
   <script type="module" src="admin_dasboard.js"></script>
+
+  <script>
+    function openDatasheet(path) {
+      window.open(path, '_blank');
+    }
+  </script>
 </body>
 </html>
