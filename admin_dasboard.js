@@ -17,14 +17,14 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // Navigasi UI
-window.showSection = function(id) {
+window.showSection = function (id) {
   document.querySelectorAll("section").forEach(sec => sec.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   if (id === 'log') renderTable(dataLog);
 };
 
 // Ganti Password
-window.changePassword = function() {
+window.changePassword = function () {
   const newPassword = document.getElementById("newPassword").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
 
@@ -49,7 +49,7 @@ window.changePassword = function() {
 // Data Log dari Firebase
 let dataLog = [];
 
-// Baca Riwayat dari Firebase
+// Baca data log dari Firebase
 const logRef = ref(db, 'HQ/RIWAYAT');
 onValue(logRef, (snapshot) => {
   dataLog = [];
@@ -58,10 +58,24 @@ onValue(logRef, (snapshot) => {
     const tanggal = tanggalSnap.key;
     tanggalSnap.forEach(entrySnap => {
       const entry = entrySnap.val();
+
+      // Tentukan aktivitas berdasarkan status alat
+      let aktivitasText = "-";
+      if (entry.status === "ON" || entry.status === 1) {
+        aktivitasText = "Alat Hidup";
+      } else if (entry.status === "OFF" || entry.status === 0) {
+        aktivitasText = "Alat Mati";
+      }
+
       dataLog.push({
         tanggal: tanggal,
-        waktu: entry.waktu,
-        aktivitas: `PPM: ${entry.ppm}, Suhu: ${entry.suhu}, pH: ${entry.ph}, PWM: ${entry.pwm}`
+        waktu: entry.waktu || "-",
+        aktivitas: aktivitasText,
+        ppm: entry.ppm ?? "-",
+        setpoint: entry.setpoint ?? "-",
+        suhu: entry.suhu ?? "-",
+        ph: entry.ph ?? "-",
+        tinggi_air: entry.tinggi_air ?? "-"
       });
     });
   });
@@ -69,7 +83,7 @@ onValue(logRef, (snapshot) => {
   renderTable(dataLog);
 });
 
-// Fungsi Tabel
+// Render tabel log
 function renderTable(filteredData = dataLog) {
   const tbody = document.getElementById('riwayatBody');
   tbody.innerHTML = '';
@@ -80,18 +94,23 @@ function renderTable(filteredData = dataLog) {
   }
 
   filteredData.forEach(item => {
-    const row = `<tr>
-      <td>${item.tanggal}</td>
-      <td>${item.waktu}</td>
-      <td>${item.aktivitas}</td>
-      <td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-    </tr>`;
+    const row = `
+      <tr>
+        <td>${item.tanggal}</td>
+        <td>${item.waktu}</td>
+        <td>${item.aktivitas}</td>
+        <td>${item.ppm}</td>
+        <td>${item.setpoint}</td>
+        <td>${item.suhu}</td>
+        <td>${item.ph}</td>
+        <td>${item.tinggi_air}</td>
+      </tr>`;
     tbody.innerHTML += row;
   });
 }
 
 // Filter Data
-function filterData() {
+window.filterData = function () {
   const filterType = document.getElementById('filterType').value;
   let filtered = [];
 
@@ -104,9 +123,7 @@ function filterData() {
   }
 
   renderTable(filtered);
-}
-
-window.filterData = filterData;
+};
 
 // Event Filter
 document.getElementById('filterType').addEventListener('change', function () {
@@ -124,8 +141,7 @@ document.getElementById("downloadExcel").addEventListener("click", function () {
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", function () {
-  const konfirmasi = confirm("Apakah Anda yakin ingin logout?");
-  if (konfirmasi) {
+  if (confirm("Apakah Anda yakin ingin logout?")) {
     localStorage.clear();
     window.location.href = "index.html";
   }
@@ -133,6 +149,7 @@ document.getElementById("logoutBtn").addEventListener("click", function () {
 
 // Default tampilan
 showSection('home');
+
 function openDatasheet(path) {
   window.open(path, '_blank');
 }
